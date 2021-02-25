@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/3dee0e509d.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --deep-dark: rgb(26, 26, 26);
+    --light-dark: rgb(79, 82, 92);
+    --light-blue: rgb(0, 132, 255);
+    --dark-blue: rgb(2, 84, 161);
+    --light: rgb(245, 245, 245);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--light);
+}
+
+h1 {
+    color: var(--light);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.todo {
+    width: 800px;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 4px 4px 5px rgba(82, 82, 82, .4);
+    text-align: center;
+}
+
+.header {
+    border-radius: 5px 5px 0 0;
+    padding: 40px;
+    background-image: linear-gradient(340deg, #045de9 0%, #09c6f9 100%);
+}
+
+.todoInput {
+    width: 80%;
+    padding: 10px 20px;
+    margin-right: 20px;
+    border: none;
+    border-radius: 5px;
+    color: var(--light-dark);
+    background-color: var(--light);
+}
+
+.alertInfo {
+    margin-top: 20px;
+    color: var(--dark-blue);
+}
+
+.addBtn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 5px;
+    color: var(--deep-dark);
+    background-color: var(--light);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color .3s, background-color .3s;
+}
+
+.addBtn:hover {
+    color: #fff;
+    background-color: var(--light-dark);
+}
+
+.todoList {
+    padding: 20px 0;
+}
+
+.todoList h3 {
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.todoList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+    padding-left: 20px;
+    text-align: left;
+    list-style: none;
+    background-color: var(--light);
+}
+
+.tools {
+    display: inline-block;
+}
+
+.tools button {
+    padding: 15px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.tools button:hover {
+    background-color: #ddd;
+}
+
+.complete {
+    color: var(--light-blue);
+}
+
+.edit {
+    font-weight: bold;
+    color: rgb(15, 179, 69);
+}
+
+.delete {
+    color: tomato;
+}
+
+.completed {
+    font-size: 12px;
+    color: var(--light-dark);
+    text-decoration: line-through;
+    font-style: italic;
+}
+
+.popup {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    color: var(--light);
+    background-color: var(--light-dark);
+    border-radius: 5px;
+}
+
+.popup h3 {
+    padding: 20px;
+}
+
+.popupInfo {
+    color: var(--light);
+    margin-bottom: 20px;
+}
+
+.popupBody {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 10px;
+}
+
+.popupInput {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: var(--light-dark);
+    background-color: var(--light);
+}
+
+.popupBtn {
+    width: 30%;
+    display: inline-block;
+    padding: 10px 22px;
+    margin: 20px;
+    border: none;
+    border-radius: 5px;
+    color: var(--deep-dark);
+    background-color: var(--light);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color .3s, background-color .3s;
+}
+
+.popupBtn:hover {
+    color: #fff;
+    background-color: var(--light-blue);
+}
+
+.hide {
+    display: none;
+}
+    </style>
+</head>
+<body>
+    <div class="todo">
+        <div class="header">
+            <h1>ToDo List</h1>
+            <input type="text" class="todoInput" placeholder="Wpisz treść zadania...">
+            <button class="addBtn">Add</button>
+        </div>
+        <div class="todoList">
+            <h3>Lista zadań:</h3>
+            <p class="alertInfo">Brak zadań na liście.</p>
+            <ul>
+                    <li id='test'>Wypić kawę<div class="tools"><button class="complete"><i
+                                class="fas fa-check"></i></button><button class="edit">EDIT</button><button
+                            class="delete"><i class="fas fa-times"></i></button>
+                    </div>
+                    </li>
+                    <li id='test2'>Zjeść śniadanie<div class="tools"><button class="complete"><i
+                                    class="fas fa-check"></i></button><button class="edit">EDIT</button><button
+                                class="delete"><i class="fas fa-times"></i></button>
+                        </div>
+                    </li>
+                    <li id='test3'>Umyć okna<div class="tools"><button class="complete"><i
+                                    class="fas fa-check"></i></button><button class="edit">EDIT</button><button
+                                class="delete"><i class="fas fa-times"></i></button>
+                        </div>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="popup hide">
+        <h3>Edytuj zadanie:</h3>
+        <div class="popupBody">
+            <p class="popupInfo"></p>
+            <input type="text" class="popupInput" placeholder="Wprowadź nową treść zadania...">
+            <button class="popupBtn accept">Zatwierdź</button>
+            <button class="popupBtn cancel">Anuluj</button>
+        </div>
+    </div>
+    <script>
+
+        let $todoInput;
+        let $alertInfo;
+        let $addBtn;
+        let $ulList;
+        let $newTask;
+        let $toolsPanel;
+        let $completeBtn;
+        let $editBtn;
+        let $deleteBtn;
+        let $popup;
+        let $popupInfo;
+        let $editedTodo;
+        let $popupInput;
+        let $addPopupBtn;
+        let $closeTodoBtn;
+        let $idNumber = 0;
+        let $allTasks;
+
+        const main = () => {
+            prepareDOMElements();
+            prepareDOMEvents();
+        };
+
+        const prepareDOMElements = () => {
+            $todoInput = document.querySelector('.todoInput');
+            $alertInfo = document.querySelector('.alertInfo');
+            $addBtn = document.querySelector('.addBtn');
+            $ulList = document.querySelector('.todoList ul');
+
+            $popup = document.querySelector('.popup');
+            $popupInfo = document.querySelector('.popupInfo');
+            $popupInput = document.querySelector('.popupInput');
+            $addPopupBtn = document.querySelector('.accept');
+            $closeTodoBtn = document.querySelector('.cancel');
+            $allTasks = $ulList.getElementsByTagName('li');
+        };
+
+        const prepareDOMEvents = () => {
+            $addBtn.addEventListener('click', addNewTask);
+            $ulList.addEventListener('click', clickCheck);
+            $closeTodoBtn.addEventListener('click', closePopup);
+            $addPopupBtn.addEventListener('click', changeTodo);
+            $todoInput.addEventListener('keyup', enterCheck);
+        };
+
+        const addNewTask = () => {
+            if($todoInput.value !== '') {
+                $idNumber++;
+                $newTask = document.createElement('li');
+                $newTask.textContent = $todoInput.value;
+                $newTask.setAttribute('id', `todo-${$idNumber}`);
+                $ulList.appendChild($newTask);
+                $todoInput.value = '';
+                createToolsArea();
+                $alertInfo.innerText = '';
+            } else {
+                $alertInfo.textContent = 'Wpisz treść zadania!';
+            }
+
+        };
+
+        const enterCheck = () => {
+            if(event.keyCode === 13) {
+                addNewTask();
+            }
+        }
+
+        const createToolsArea = () => {
+            $toolsPanel = document.createElement('div');
+            $toolsPanel.classList.add('tools');
+            $completeBtn = document.createElement('button');
+            $completeBtn.classList.add('complete');
+            $editBtn = document.createElement('button');
+            $editBtn.classList.add('edit');
+            $deleteBtn = document.createElement('button');
+            $deleteBtn.classList.add('delete');
+            $newTask.appendChild($toolsPanel);
+            $completeBtn.innerHTML = '<i class="fas fa-check"></i>';
+            $editBtn.innerText = 'EDIT';
+            $deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+            $toolsPanel.appendChild($completeBtn);
+            $toolsPanel.appendChild($editBtn);
+            $toolsPanel.appendChild($deleteBtn);
+
+        };
+
+        const clickCheck = (e) => {
+            if (e.target.closest('button').classList.contains('complete')) {
+               e.target.closest('li').classList.toggle('completed');
+               e.target.closest('button').classList.toggle('completed');
+
+            } 
+            else if (e.target.closest('button').classList.contains('edit')) {
+                // console.log(e.target);
+                editTask(e);
+            } else if (e.target.closest('button').classList.contains('delete')) {
+                deleteTask(e);
+            }           
+
+        };
+
+        const editTask = (e) => {
+            const oldTodo = e.target.closest('li').id;
+            $editedTodo = document.getElementById(oldTodo);
+            $popupInput.value = $editedTodo.firstChild.textContent;
+            $popup.style.display = 'flex';
+        };
+
+        const closePopup = () => {
+            $popup.style.display = 'none';
+            $popupInfo.innerText = '';
+        }
+
+        const changeTodo = () => {
+            if ($popupInput.value !== '') {
+                $editedTodo.firstChild.textContent = $popupInput.value;
+                $popup.style.display = 'none';
+                $popupInfo.innerText = '';
+            } else {
+                $popupInfo.innerText = 'Musisz podać jakąś treść';                
+
+            }
+        };
+
+        const deleteTask = (e) => {
+            const deleteTodo = e.target.closest('li');
+            deleteTodo.remove();
+
+            if($allTasks.length === 0) {
+                $alertInfo.innerText = 'Brak zadań na liście.';
+            }
+
+        };
+
+
+
+        document.addEventListener('DOMContentLoaded', main);
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>
